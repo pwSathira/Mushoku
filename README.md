@@ -1,4 +1,4 @@
-# Create T3 App
+![Mushoku Banner](https://github.com/user-attachments/assets/02781651-bd9e-4865-8afc-74d17467abee)
 
 This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.
 
