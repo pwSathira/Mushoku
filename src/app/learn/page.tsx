@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Progress } from "@/components/ui/progress"
 import { Badge } from "@/components/ui/badge"
-import { RotateCcw, ArrowLeft, ArrowRight } from "lucide-react"
+import { RotateCcw, ArrowLeft, ArrowRight, BookOpen, Brain } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
 import { ThemeToggle } from "@/components/theme-toggle"
@@ -14,6 +14,7 @@ import { Popover, PopoverTrigger, PopoverContent } from "@/components/ui/popover
 import { Command, CommandInput, CommandList, CommandEmpty, CommandGroup, CommandItem } from "@/components/ui/command"
 import { ChevronsUpDown, Check } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { usePathname, useRouter } from "next/navigation"
 
 type JapaneseChar = {
   sound: string
@@ -64,6 +65,8 @@ const characterGroups: CharacterGroup[] = [
 export default function LearnPage() {
   const [currentGroupIndex, setCurrentGroupIndex] = useState(0)
   const [currentIndex, setCurrentIndex] = useState(0)
+  const pathname = usePathname()
+  const router = useRouter()
 
   // Ensure we always have a valid character and group
   const currentGroup: CharacterGroup = characterGroups[currentGroupIndex] ?? characterGroups[0]!
@@ -111,6 +114,37 @@ export default function LearnPage() {
             </Link>
             <div className="flex items-center gap-4">
               <ThemeToggle />
+              {/* Segmented Control for Mode Toggle */}
+              <div className="flex bg-gray-100 dark:bg-gray-800 rounded-lg border border-gray-300 dark:border-gray-700 p-0.5">
+                <button
+                  className={cn(
+                    "flex items-center gap-1.5 px-3 py-1 rounded-lg text-sm font-semibold transition-all focus:outline-none",
+                    pathname === "/learn"
+                      ? "bg-gray-900 text-white dark:bg-white dark:text-black border border-gray-400 dark:border-gray-300 shadow-sm"
+                      : "bg-transparent text-black dark:text-white"
+                  )}
+                  onClick={() => router.push("/learn")}
+                  type="button"
+                  aria-pressed={pathname === "/learn"}
+                >
+                  <BookOpen className="w-4 h-4" />
+                  Learn
+                </button>
+                <button
+                  className={cn(
+                    "flex items-center gap-1.5 px-3 py-1 rounded-lg text-sm font-semibold transition-all focus:outline-none",
+                    pathname === "/quiz"
+                      ? "bg-gray-900 text-white dark:bg-white dark:text-black border border-gray-400 dark:border-gray-300 shadow-sm"
+                      : "bg-transparent text-black dark:text-white"
+                  )}
+                  onClick={() => router.push("/quiz")}
+                  type="button"
+                  aria-pressed={pathname === "/quiz"}
+                >
+                  <Brain className="w-4 h-4" />
+                  Quiz
+                </button>
+              </div>
             </div>
           </div>
         </div>
