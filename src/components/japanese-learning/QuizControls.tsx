@@ -13,7 +13,7 @@ export function QuizControls({ onResetProgress, onShuffleQuiz }: QuizControlsPro
     <Card className="border-red-100 dark:border-red-800">
       <CardContent className="space-y-4">
         <div className="space-y-2">
-          <div className="font-semibold text-purple-400 text-sm mb-1">Quiz Controls</div>
+          <div className="font-semibold text-purple-400 text-sm mb-1">Quiz Controls</div> 
           <Button 
             variant="outline" 
             onClick={onResetProgress} 

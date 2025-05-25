@@ -1,6 +1,12 @@
 {
-  "name": "",
+  "name": "Mushoku - Learn Japanese Writing",
   "short_name": "Mushoku",
+  "description": "Master Hiragana and Katakana with our innovative paired learning approach",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#ffffff",
+  "orientation": "portrait",
   "icons": [
     {
       "src": "/web-app-manifest-192x192.png",
@@ -14,8 +20,5 @@
       "type": "image/png",
       "purpose": "maskable"
     }
-  ],
-  "theme_color": "#ffffff",
-  "background_color": "#ffffff",
-  "display": "standalone"
+  ]
 }

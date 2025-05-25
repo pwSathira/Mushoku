@@ -153,7 +153,7 @@ export function LearningModes() {
                   <Star className="w-5 h-5 text-red-500" />
                   <span className="text-gray-700 dark:text-gray-300">Score tracking</span>
                 </motion.div>
-                <Link href="/learn" className="block pt-4">
+                <Link href="/quiz" className="block pt-4">
                   <Button className="w-full bg-black dark:bg-white hover:bg-red-700 dark:hover:bg-red-400 text-white dark:text-black font-bold">Take Quiz</Button>
                 </Link>
               </CardContent>

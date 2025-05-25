@@ -28,7 +28,7 @@ export function Hero() {
             transition={{ duration: 0.5, delay: 0.2 }}
           >
             <Badge variant="secondary" className="bg-red-100 dark:bg-red-900 text-red-800 dark:text-red-100 border-red-200 dark:border-red-800 mb-4 font-bold">
-              Master Japanese Writing
+              Master Japanese Characters
             </Badge>
           </motion.div>
           <motion.h1 
@@ -103,14 +103,16 @@ export function Hero() {
               Start Learning Now
             </Button>
           </Link>
-          <Button
-            size="lg"
-            variant="outline"
-            className="border-red-200 dark:border-red-800 text-red-700 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/50 px-8 py-3 text-lg font-bold"
-          >
-            <Brain className="w-5 h-5 mr-2" />
-            Take a Quiz
-          </Button>
+          <Link href="/quiz">
+            <Button
+              size="lg"
+              variant="outline"
+              className="border-red-200 dark:border-red-800 text-red-700 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/50 px-8 py-3 text-lg font-bold"
+            >
+              <Brain className="w-5 h-5 mr-2" />
+              Take a Quiz
+            </Button>
+          </Link>
         </motion.div>
       </div>
     </section>

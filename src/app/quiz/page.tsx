@@ -213,8 +213,10 @@ export default function QuizPage() {
           score={score}
           quizAnswers={quizAnswers}
         />
+      
         {/* Quiz Interface */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-8">
+          
           {/* Main Quiz Area */}
           <div className="lg:col-span-2 space-y-4">
             {quizChars.length === 0 ? (
@@ -448,6 +450,8 @@ export default function QuizPage() {
 
           {/* Sidebar */}
           <div className="space-y-4 sm:space-y-6 mt-4 lg:mt-0">
+            {/* Series Selector (multi-select) */}
+            <SeriesSelector selectedIndices={selectedGroupIndices} onChange={handleGroupChange} />
             {/* Toggles */}
             <QuizModeToggle 
               quizType={quizType}
@@ -455,8 +459,6 @@ export default function QuizPage() {
               onQuizTypeChange={setQuizType}
               onQuizInputTypeChange={setQuizInputType}
             />
-            {/* Series Selector (multi-select) */}
-            <SeriesSelector selectedIndices={selectedGroupIndices} onChange={handleGroupChange} />
             {/* Quiz Controls */}
             <QuizControls 
               onResetProgress={resetProgress}
