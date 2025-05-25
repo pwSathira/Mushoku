@@ -158,15 +158,15 @@ export default function QuizPage() {
   }
 
   return (
-    <div className="min-h-screen bg-white dark:bg-gray-900">
+    <div className="min-h-screen bg-white dark:bg-gray-900 overflow-x-hidden">
       {/* Top Navigation Bar */}
       <div className="bg-white/90 dark:bg-gray-900/90 backdrop-blur-sm border-b border-red-200 dark:border-red-800 sticky top-0 z-50">
-        <div className="max-w-6xl mx-auto px-4 py-4">
-          <div className="flex items-center justify-between">
+        <div className="max-w-6xl mx-auto px-2 sm:px-4 py-2 sm:py-4">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-2 sm:gap-0">
             <Link href="/" className="flex items-center space-x-2">
-              <Image src="/Mushoku_Logo.png" alt="Mushoku" width={64} height={64} />
+              <Image src="/Mushoku_Logo.png" alt="Mushoku" width={48} height={48} className="sm:w-16 sm:h-16 w-12 h-12" />
             </Link>
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-2 sm:gap-4 mt-2 sm:mt-0">
               <ThemeToggle />
               {/* Segmented Control for Mode Toggle */}
               <div className="flex bg-gray-100 dark:bg-gray-800 rounded-lg border border-gray-300 dark:border-gray-700 p-0.5">
@@ -204,7 +204,7 @@ export default function QuizPage() {
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-6 py-4">
+      <div className="max-w-7xl mx-auto px-2 sm:px-6 py-2 sm:py-4">
         {/* Progress Section */}
         <ProgressSection 
           currentIndex={currentIndex}
@@ -214,7 +214,7 @@ export default function QuizPage() {
           quizAnswers={quizAnswers}
         />
         {/* Quiz Interface */}
-        <div className="grid lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-8">
           {/* Main Quiz Area */}
           <div className="lg:col-span-2 space-y-4">
             {quizChars.length === 0 ? (
@@ -396,9 +396,9 @@ export default function QuizPage() {
                         animate={{ opacity: 1, scale: 1 }}
                         exit={{ opacity: 0, scale: 0.95 }}
                         transition={{ duration: 0.2 }}
-                        className="absolute inset-0 flex items-center justify-center z-20"
+                        className="absolute inset-0 flex items-center justify-center z-20 px-2"
                       >
-                        <div className="bg-white/90 dark:bg-gray-900/90 rounded-xl p-8 border-2 border-gray-100 dark:border-gray-700 shadow-xl max-w-lg w-full mx-auto flex flex-col items-center">
+                        <div className="bg-white/90 dark:bg-gray-900/90 rounded-xl p-4 sm:p-8 border-2 border-gray-100 dark:border-gray-700 shadow-xl w-full max-w-full sm:max-w-lg mx-auto flex flex-col items-center">
                           {isTypingCorrect === false || (quizInputType === "choice" && !quizAnswers[currentIndex]) ? (
                             <motion.div
                               initial={{ opacity: 0, y: 10 }}
@@ -447,7 +447,7 @@ export default function QuizPage() {
           </div>
 
           {/* Sidebar */}
-          <div className="space-y-6">
+          <div className="space-y-4 sm:space-y-6 mt-4 lg:mt-0">
             {/* Toggles */}
             <QuizModeToggle 
               quizType={quizType}
