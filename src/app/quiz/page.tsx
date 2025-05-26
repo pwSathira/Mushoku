@@ -3,13 +3,9 @@
 import { useState, useEffect } from "react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { CheckCircle, XCircle, BookOpen, Brain } from "lucide-react"
-import Image from "next/image"
+import { CheckCircle, XCircle } from "lucide-react"
 import Link from "next/link"
-import { ThemeToggle } from "@/components/theme-toggle"
-import { usePathname, useRouter } from "next/navigation"
-import { cn } from "@/lib/utils"
-import { motion, AnimatePresence } from "framer-motion"
+import { motion, AnimatePresence } from "motion/react"
 import { characterGroups} from "@/types/japanese"
 import { ProgressSection } from "@/components/japanese-learning/ProgressSection"
 import { QuizCharacterDisplay } from "@/components/japanese-learning/QuizCharacterDisplay"
@@ -31,8 +27,6 @@ export default function QuizPage() {
   const [currentOptions, setCurrentOptions] = useState<string[]>([])
   const [quizChars, setQuizChars] = useState<typeof characterGroups[number]["characters"]>([])
   const [isQuizComplete, setIsQuizComplete] = useState<boolean>(false)
-  const pathname = usePathname()
-  const router = useRouter()
 
   // Get the pool of characters from selected groups
   const selectedGroups = selectedGroupIndices
