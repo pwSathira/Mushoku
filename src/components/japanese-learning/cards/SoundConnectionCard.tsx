@@ -3,7 +3,7 @@ import { Badge } from "@/components/ui/badge"
 import type { JapaneseChar } from "@/types/japanese"
 import { Button } from "@/components/ui/button"
 import { Volume2 } from "lucide-react"
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 
 interface SoundConnectionCardProps {
   char: JapaneseChar
@@ -11,26 +11,88 @@ interface SoundConnectionCardProps {
 
 export function SoundConnectionCard({ char }: SoundConnectionCardProps) {
   const [isPlaying, setIsPlaying] = useState(false)
+  const audioRef = useRef<HTMLAudioElement | null>(null)
+  const hasInteractedRef = useRef(false)
 
   const playSound = () => {
-    if (isPlaying) return
+    console.log('Attempting to play sound...')
+    if (!audioRef.current) {
+      console.error('No audio element available')
+      return
+    }
+    
     setIsPlaying(true)
-    const utterance = new SpeechSynthesisUtterance(char.sound)
-    utterance.lang = "ja-JP"
-    utterance.onend = () => setIsPlaying(false)
-    speechSynthesis.speak(utterance)
+    audioRef.current.currentTime = 0
+    
+    const playPromise = audioRef.current.play()
+    if (playPromise !== undefined) {
+      playPromise
+        .then(() => {
+          console.log('Audio started playing')
+        })
+        .catch(error => {
+          console.error('Error playing audio:', error)
+          setIsPlaying(false)
+        })
+    }
   }
 
+  // Handle user interaction
   useEffect(() => {
-    // Small delay to ensure the component is fully mounted
+    const handleInteraction = () => {
+      console.log('User interaction detected')
+      hasInteractedRef.current = true
+      // Remove listeners after first interaction
+      document.removeEventListener('click', handleInteraction)
+      document.removeEventListener('keydown', handleInteraction)
+    }
+
+    document.addEventListener('click', handleInteraction)
+    document.addEventListener('keydown', handleInteraction)
+
+    return () => {
+      document.removeEventListener('click', handleInteraction)
+      document.removeEventListener('keydown', handleInteraction)
+    }
+  }, [])
+
+  useEffect(() => {
+    if (!char.fileNumber) {
+      console.error(`No file number found for romaji: ${char.romaji}`)
+      return
+    }
+
+    console.log(`Loading audio for ${char.romaji} with file number ${char.fileNumber}`)
+    
+    // Create audio element
+    const audio = new Audio(`/audio_characters/katakana_${char.fileNumber}_${char.romaji}.mp3`)
+    
+    audio.onended = () => {
+      console.log('Audio playback ended')
+      setIsPlaying(false)
+    }
+    
+    audio.onerror = (e) => {
+      console.error('Audio loading error:', e)
+      setIsPlaying(false)
+    }
+    
+    audioRef.current = audio
+
+    // Try to play after a short delay if user has interacted
     const timer = setTimeout(() => {
-      playSound()
+      if (hasInteractedRef.current) {
+        console.log('Attempting auto-play after delay')
+        playSound()
+      }
     }, 500)
 
     return () => {
       clearTimeout(timer)
-      // Cancel any ongoing speech when component unmounts
-      speechSynthesis.cancel()
+      if (audioRef.current) {
+        audioRef.current.pause()
+        audioRef.current = null
+      }
     }
   }, [char]) // Re-run when char changes
 
