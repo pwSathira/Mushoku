@@ -1,6 +1,6 @@
 import Link from "next/link"
 import Image from "next/image"
-import { ThemeToggle } from "@/components/theme-toggle"
+import { ThemeToggle } from "~/components/theme/theme-toggle"
 import { BookOpen, Brain } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { usePathname, useRouter } from "next/navigation"

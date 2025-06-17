@@ -1,5 +1,5 @@
 import { Button } from "./ui/button"
-import { ThemeToggle } from "./theme-toggle"
+import { ThemeToggle } from "~/components/theme/theme-toggle"
 import Link from "next/link"
 import Image from "next/image"
 
